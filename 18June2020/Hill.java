@@ -34,14 +34,11 @@ public class Hill {
 	        msg = msg.replaceAll("\\s" , "");
 	        msg = msg.toUpperCase();
 
-	        // if irregular length, then perform padding
 	        int lenChk = 0;
 	        if (msg.length() % 2 != 0){
 	            msg += "0";
 	            lenChk = 1;
 	        }
-
-	        // message to matrices
 	        int[][] msg2D = new int[2][msg.length()];
 	        int itr1 = 0;
 	        int itr2 = 0;
@@ -52,15 +49,13 @@ public class Hill {
 	            } else {
 	                msg2D[1][itr2] = ((int)msg.charAt(i)) - 65;
 	                itr2++;
-	            } // if-else
-	        } // for
+	            } 
+	        } 
 
 	        System.out.print("Enter 4 letter key string: ");
 	        String key = in.nextLine();
 	        key = key.replaceAll("\\s","");
 	        key = key.toUpperCase();
-
-	        // key to 2x2 matrix
 	        int[][] key2D = new int[2][2];
 	        int itr3 = 0;
 	        for (int i = 0; i < 2; i++) {
@@ -69,13 +64,9 @@ public class Hill {
 	                itr3++;
 	            }
 	        }
-
-	        // validating the key
-	        // finding determinant of key matrix
 	        int deter = key2D[0][0] * key2D[1][1] - key2D[0][1] * key2D[1][0];
 	        deter = moduloFunc(deter, 26);
 
-	        // multiplicative inverse of key matrix
 	        int mulInverse = -1;
 	        for (int i = 0; i < 26; i++) {
 	            int tempInv = deter * i;
@@ -84,23 +75,19 @@ public class Hill {
 	                break;
 	            } else {
 	                continue;
-	            } // if-else
-	        } // for
+	            } 
+	        }
 
-	        // adjugate matrix
-	        // swapping
 	        int swapTemp = key2D[0][0];
 	        key2D[0][0] = key2D[1][1];
 	        key2D[1][1] = swapTemp;
 
-	        // changing signs
 	        key2D[0][1] *= -1;
 	        key2D[1][0] *= -1;
 
 	        key2D[0][1] = moduloFunc(key2D[0][1], 26);
 	        key2D[1][0] = moduloFunc(key2D[1][0], 26);
 
-	        // multiplying multiplicative inverse with adjugate matrix
 	        for (int i = 0; i < 2; i++) {
 	            for (int j = 0; j < 2; j++) {
 	                key2D[i][j] *= mulInverse;
@@ -115,15 +102,13 @@ public class Hill {
 	        String decrypText = "";
 	        int itrCount = msg.length() / 2;
 	        if (lenChk == 0){
-	            // if msg length % 2 = 0
-	            for (int i = 0; i < itrCount; i++) {
+			for (int i = 0; i < itrCount; i++) {
 	                int temp1 = msg2D[0][i] * key2D[0][0] + msg2D[1][i] * key2D[0][1];
 	                decrypText += (char)((temp1 % 26) + 65);
 	                int temp2 = msg2D[0][i] * key2D[1][0] + msg2D[1][i] * key2D[1][1];
 	                decrypText += (char)((temp2 % 26) + 65);
 	            }
 	        } else {
-	            // if msg length % 2 != 0 (irregular length msg)
 	            for (int i = 0; i < itrCount-1; i++) {
 	                int temp1 = msg2D[0][i] * key2D[0][0] + msg2D[1][i] * key2D[0][1];
 	                decrypText += (char)((temp1 % 26) + 65);
@@ -142,15 +127,11 @@ public class Hill {
 	        String msg = in.nextLine();
 	        msg = msg.replaceAll("\\s" , "");
 	        msg = msg.toUpperCase();
-
-	        // if irregular length, then perform padding
 	        int lenChk = 0;
 	        if (msg.length() % 2 != 0){
 	            msg += "0";
 	            lenChk = 1;
 	        }
-
-	        // message to matrices
 	        int[][] msg2D = new int[2][msg.length()];
 	        int itr1 = 0;
 	        int itr2 = 0;
@@ -161,23 +142,14 @@ public class Hill {
 	            } else {
 	                msg2D[1][itr2] = ((int)msg.charAt(i)) - 65;
 	                itr2++;
-	            } // if-else
-	        } // for
-
-//	        // testing 2D matrix
-//	        for (int i = 0; i < 2; i++) {
-//	            for (int j = 0; j < msg.length() / 2; j++) {
-//	                System.out.print((char)(msg2D[i][j]+65) + " ");
-//	            }
-//	            System.out.println();
-//	        }
+	            } 
+	        } 
 
 	        System.out.print("Enter 4 letter key string: ");
 	        String key = in.nextLine();
 	        key = key.replaceAll("\\s","");
 	        key = key.toUpperCase();
 
-	        // key to 2x2 matrix
 	        int[][] key2D = new int[2][2];
 	        int itr3 = 0;
 	        for (int i = 0; i < 2; i++) {
@@ -187,12 +159,8 @@ public class Hill {
 	            }
 	        }
 
-	        // validating the key
-	        // finding determinant of key matrix
 	        int deter = key2D[0][0] * key2D[1][1] - key2D[0][1] * key2D[1][0];
 	        deter = moduloFunc(deter, 26);
-
-	        // multiplicative inverse of key matrix
 	        int mulInverse = -1;
 	        for (int i = 0; i < 26; i++) {
 	            int tempInv = deter * i;
@@ -201,8 +169,8 @@ public class Hill {
 	                break;
 	            } else {
 	                continue;
-	            } // if-else
-	        } // for
+	            } 
+	        } 
 
 	        if (mulInverse == -1){
 	            System.out.println("invalid key");
@@ -212,7 +180,6 @@ public class Hill {
 	        String encrypText = "";
 	        int itrCount = msg.length() / 2;
 	        if (lenChk == 0){
-	            // if msg length % 2 = 0
 	            for (int i = 0; i < itrCount; i++) {
 	                int temp1 = msg2D[0][i] * key2D[0][0] + msg2D[1][i] * key2D[0][1];
 	                encrypText += (char)((temp1 % 26) + 65);
@@ -220,7 +187,6 @@ public class Hill {
 	                encrypText += (char)((temp2 % 26) + 65);
 	            }
 	        } else {
-	            // if msg length % 2 != 0 (irregular length msg)
 	            for (int i = 0; i < itrCount-1; i++) {
 	                int temp1 = msg2D[0][i] * key2D[0][0] + msg2D[1][i] * key2D[0][1];
 	                encrypText += (char)((temp1 % 26) + 65);
@@ -232,8 +198,6 @@ public class Hill {
 	        System.out.println("Encrypted Text: " + encrypText);
 
 	    }
-
-	    // modulo function
 	    public static int moduloFunc(int a, int b){
 	        int result = a % b;
 	        if (result < 0){
@@ -244,7 +208,6 @@ public class Hill {
 	    private static void railDecryption() {
 	        System.out.print("Enter message: ");
 	        String message = in.nextLine();
-	        // removing white space from message
 	        message = message.replaceAll("\\s","");
 	        in.nextLine();
 
@@ -253,14 +216,11 @@ public class Hill {
 	        in.nextLine();
 
 	        char[][] rail = new char[key][message.length()];
-	        // matrix
 	        for (int i = 0; i < key; i++){
 	            for (int j = 0; j < message.length(); j++) {
 	                rail[i][j] = '.';
 	            }
-	        } // for
-
-	        // putting letters in the matrix in zig-zag
+	        } 
 	        int row = 0;
 	        int check = 0;
 	        for (int i = 0; i < message.length(); i++) {
@@ -278,26 +238,22 @@ public class Hill {
 	                    check = 0;
 	                    row = 1;
 	                }
-	            } // if-else
-	        } // for
+	            } 
+	        } 
 
-	        // changing order of rails
+	        
 	        int ordr = 0;
 	        for (int i = 0; i < key; i++) {
 	            for (int j = 0; j < message.length(); j++) {
 	                String temp = rail[i][j] + "";
 	                if (temp.matches("\\.")){
-	                    // skipping in case of '.'
 	                    continue;
 	                } else {
-	                    // adding cipher letters one by one diagonally
 	                    rail[i][j] = message.charAt(ordr);
 	                    ordr++;
-	                } // if-else
-	            } // inner for
-	        } // for
-
-	        // checking message reorder on rails
+	                } 
+	            } 
+	        } 
 	        System.out.println("Reorder");
 	        for (int i = 0; i < key; i++) {
 	            for (int j = 0; j < message.length(); j++) {
@@ -309,7 +265,6 @@ public class Hill {
 	        String decrypText = "";
 	        check = 0;
 	        row = 0;
-	        // converting rails back into a single line message
 	        for (int i = 0; i < message.length(); i++) {
 	            if (check == 0){
 	                decrypText += rail[row][i];
@@ -325,18 +280,15 @@ public class Hill {
 	                    check = 0;
 	                    row = 1;
 	                }
-	            } // if-else
-	        } // for
+	            } 
+	        }
 
 	        System.out.println("Decrypted Text: " + decrypText);
-
-
 	    }
 
 	    private static void railEncryption() {
 	        System.out.print("Enter message: ");
 	        String message = in.nextLine();
-	        // removing white space from message
 	        message = message.replaceAll("\\s","");
 	        in.nextLine();
 
@@ -345,13 +297,11 @@ public class Hill {
 	        in.nextLine();
 
 	        char[][] rail = new char[key][message.length()];
-	        // matrix
 	        for (int i = 0; i < key; i++){
 	            for (int j = 0; j < message.length(); j++) {
 	                rail[i][j] = '.';
 	            }
 	        } 
-	        // putting letters in the matrix in zig-zag
 	        int row = 0;
 	        int check = 0;
 	        for (int i = 0; i < message.length(); i++) {
@@ -369,14 +319,12 @@ public class Hill {
 	                    check = 0;
 	                    row = 1;
 	                }
-	            } // if-else
-	        } // for
-
+	            } 
+	        }
 	        String encrypText = "";
 	        for (int i = 0; i < key; i++) {
 	            for (int j = 0; j < message.length(); j++) {
 	                encrypText += rail[i][j];
-
 	            }
 	        }
 
