@@ -1,0 +1,28 @@
+package BinaryTree;
+import java.util.Scanner;
+class Node{
+	int key;
+	Node left,right;
+	public Node(int item) {
+		key = item;
+		left = right = null;
+	}
+}
+
+public class BT {
+	Node root;
+	BT(int key){
+		root = new Node(key);
+	}
+	BT(){
+		root = null;
+	}
+	public static void main(String[] args) {
+		BT tree = new BT();
+		tree.root = new Node(1);
+		tree.root.left = new Node(2);
+		tree.root.node = new Node(3);
+		tree.rootnode
+	}
+
+}
