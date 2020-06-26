@@ -16,6 +16,7 @@ public class HackerEarth {
 	            System.out.println();
 	        }
 	        sc.close();
+		    
 	    }
 	}
 
